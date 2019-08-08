@@ -11,10 +11,10 @@ script:
   - mv dist/*.* dist/devtools/$TRAVIS_COMMIT/
 deploy:
   provider: s3
-  access_key_id: "$DIGITAL_OCEAN_SPACES_KEY_ID"
-  secret_access_key: "$DIGITAL_OCEAN_SPACES_ACCESS_KEY"
-  bucket: "$DIGITAL_OCEAN_SPACES_BUCKET"
-  endpoint: "$DIGITAL_OCEAN_SPACES_ENDPOINT"
+  access_key_id: "$AMPATH_DIGITAL_OCEAN_SPACES_KEY_ID"
+  secret_access_key: "$AMPATH_DIGITAL_OCEAN_SPACES_ACCESS_KEY"
+  bucket: "$AMPATH_DIGITAL_OCEAN_SPACES_BUCKET"
+  endpoint: "$AMPATH_DIGITAL_OCEAN_SPACES_ENDPOINT"
   cache-control: "max-age=31536000"
   local_dir: dist
   skip_cleanup: true
@@ -22,4 +22,4 @@ deploy:
   on:
     branch: master
 after_deploy:
-  - curl -u $DEPLOYER_USERNAME:$DEPLOYER_PASSWORD -d '{ "service":"@openmrs/devtools","url":"https://spa-modules.nyc3.digitaloceanspaces.com/devtools/'$TRAVIS_COMMIT'/devtools.js" }' -X PATCH $DEPLOYER_HOST/services\?env=prod -H "Accept:application/json" -H "Content-Type:application/json" --fail
+  - curl -u $AMPATH_DEPLOYER_USERNAME:$AMPATH_DEPLOYER_PASSWORD -d '{ "service":"@openmrs/devtools","url":"https://ampath-poc.fra1.digitaloceanspaces.com/devtools/'$TRAVIS_COMMIT'/devtools.js" }' -X PATCH $AMPATH_DEPLOYER_ENDPOINT/services\?env=prod -H "Accept:application/json" -H "Content-Type:application/json" --fail
