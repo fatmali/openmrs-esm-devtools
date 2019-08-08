@@ -20,6 +20,6 @@ deploy:
   skip_cleanup: true
   acl: public_read
   on:
-    branch: master
+    branch: ampath
 after_deploy:
   - curl -u $AMPATH_DEPLOYER_USERNAME:$AMPATH_DEPLOYER_PASSWORD -d '{ "service":"@openmrs/devtools","url":"https://ampath-poc.fra1.digitaloceanspaces.com/devtools/'$TRAVIS_COMMIT'/devtools.js" }' -X PATCH $AMPATH_DEPLOYER_ENDPOINT/services\?env=prod -H "Accept:application/json" -H "Content-Type:application/json" --fail
